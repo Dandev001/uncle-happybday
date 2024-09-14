@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Wish for Uncle Zed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .wish-container {
+            max-width: 600px;
+            padding: 2rem;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #bb86fc;
+            text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #03dac6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        #reveal-wish {
+            background-color: #bb86fc;
+            color: #000000;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #reveal-wish:hover {
+            background-color: #03dac6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        #wish-text {
+            display: none;
+        }
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 5s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wish-container">
+        <h1>A Special Wish for Uncle Zed</h1>
+        <button id="reveal-wish">Reveal Wish</button>
+        <div id="wish-text">
+            <p>Dear Uncle Zed,</p>
+            <p>Your wisdom lights our path, your laughter brightens our days, and your love warms our hearts. May this year bring you joy, success, and endless happiness.</p>
+            <p>Happy Birthday to the world's most amazing uncle!</p>
+        </div>
+    </div>
+    <div id="stars"></div>
+    <script>
+        const revealButton = document.getElementById('reveal-wish');
+        const wishText = document.getElementById('wish-text');
+        const starsContainer = document.getElementById('stars');
+
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        revealButton.addEventListener('click', () => {
+            wishText.style.display = 'block';
+            revealButton.style.display = 'none';
+            
+            setTimeout(() => {
+                const paragraphs = wishText.querySelectorAll('p');
+                paragraphs.forEach((p, index) => {
+                    setTimeout(() => {
+                        p.style.opacity = '1';
+                        p.style.transform = 'translateY(0)';
+                    }, index * 500);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

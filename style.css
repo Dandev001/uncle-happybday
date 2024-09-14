@@ -1,118 +1,138 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     overflow: hidden;
-    transition: background 2s ease;
 }
 
 .container {
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 3rem;
+    background-color: rgba(30, 30, 30, 0.7);
+    padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    max-width: 90%;
-    width: 400px;
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 48px rgba(31, 38, 135, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
 }
 
 h1 {
-    color: #ffffff;
-    font-size: 3.5rem;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00de, 0 0 20px #ff00de;
-    }
-    to {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00de, 0 0 40px #ff00de;
-    }
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #bb86fc;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
 }
 
 #birthday-cake {
-    font-size: 180px;
+    width: 200px;
+    height: 200px;
+    background-image: url('cake (2).png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
-    margin-bottom: 2rem;
-    animation: float 3s ease-in-out infinite;
-    user-select: none;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
+    margin: 0 auto 1rem;
 }
 
 #birthday-cake:hover {
-    transform: scale(1.1) rotate(5deg);
-    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+    transform: scale(1.05) rotate(5deg);
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
 p {
-    color: #ffffff;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #03dac6;
 }
 
-#message {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    min-height: 3em;
-    transform: translateY(20px);
+button {
+    background-color: #bb86fc;
+    color: #000000;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#message.show {
-    opacity: 1;
-    transform: translateY(0);
+button:hover {
+    background-color: #03dac6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.balloon {
+#stars {
     position: fixed;
-    bottom: -20px;
-    font-size: 30px;
-    animation: rise 10s linear infinite;
-    opacity: 0.7;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
 
-@keyframes rise {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-100vh) rotate(360deg); }
+.star {
+    position: absolute;
+    background-color: #ffffff;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite;
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 2rem;
-    }
-    
-    h1 {
-        font-size: 2.8rem;
-    }
-    
-    #birthday-cake {
-        font-size: 140px;
-    }
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+#special-wish-button {
+    background-color: #ff4081;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+#special-wish-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: all 0.5s;
+}
+
+#special-wish-button:hover {
+    background-color: #f50057;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#special-wish-button:hover:before {
+    left: 100%;
 }

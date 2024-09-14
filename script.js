@@ -1,84 +1,48 @@
 const cake = document.getElementById('birthday-cake');
-const message = document.getElementById('message');
-const balloons = document.getElementById('balloons');
+const specialWishButton = document.getElementById('special-wish-button');
+const starsContainer = document.getElementById('stars');
 
-let clickCount = 0;
-const messages = [
-    "Happy Birthday, Uncle Zed! 🎉",
-    "May your day be filled with joy! 😊",
-    "Wishing you an amazing year ahead! 🌟",
-    "You're the best uncle ever! 🏆",
-    "Time to party! 🎈🎊"
-];
+function createStars() {
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starsContainer.appendChild(star);
+    }
+}
+
+createStars();
 
 cake.addEventListener('click', () => {
-    clickCount++;
-    
-    // Trigger confetti
     confetti({
-        particleCount: 150,
-        spread: 80,
+        particleCount: 100,
+        spread: 70,
         origin: { y: 0.6 },
-        colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+        colors: ['#bb86fc', '#03dac6', '#cf6679']
     });
-
-    // Display message
-    message.textContent = messages[clickCount % messages.length];
-    message.classList.remove('show');
-    void message.offsetWidth; // Trigger reflow
-    message.classList.add('show');
-
-    // Animate cake
-    cake.style.animation = 'none';
-    cake.offsetHeight; // Trigger reflow
-    cake.style.animation = 'float 3s ease-in-out infinite, spin 0.5s ease-out';
-
-    // Reset cake animation after spin
+    
+    cake.style.animation = 'bounce 0.5s';
     setTimeout(() => {
-        cake.style.animation = 'float 3s ease-in-out infinite';
+        cake.style.animation = '';
     }, 500);
-
-    // Add balloon
-    addBalloon();
 });
 
-// Add spin animation
+specialWishButton.addEventListener('click', () => {
+    specialWishButton.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        window.location.href = 'special-wish.html';
+    }, 200);
+});
+
+// Add bounce animation
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-20px); }
+        60% { transform: translateY(-10px); }
     }
 `;
 document.head.appendChild(style);
-
-// Background color animation
-function animateBackground() {
-    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9d56e', '#ff8e72'];
-    let currentIndex = 0;
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % colors.length;
-        document.body.style.background = `linear-gradient(135deg, ${colors[currentIndex]}, ${colors[(currentIndex + 1) % colors.length]})`;
-    }, 5000);
-}
-
-function addBalloon() {
-    const balloon = document.createElement('div');
-    balloon.classList.add('balloon');
-    balloon.textContent = '🎈';
-    balloon.style.left = `${Math.random() * 100}vw`;
-    balloon.style.animationDuration = `${Math.random() * 5 + 5}s`;
-    balloons.appendChild(balloon);
-
-    setTimeout(() => {
-        balloon.remove();
-    }, 10000);
-}
-
-animateBackground();
-
-// Initial balloons
-for (let i = 0; i < 5; i++) {
-    setTimeout(addBalloon, i * 1000);
-}
